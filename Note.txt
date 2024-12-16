@@ -1,0 +1,17 @@
+## Accomplishments
+
+- **Backend**  
+  - Created an Express.js application.  
+  - Set up GraphQL for API development.  
+  - Established a connection with the MongoDB database.  
+  - Developed a service to interact with the CasperCG service.  
+  - Created a resolver that triggers when a new caption is created in the React application form. This saves the data to the database, utilizes Pub/Sub to publish the message, and allows templates to consume it to render captions on CasperCG.  
+
+	
+-> Frontend  
+  -> Created a form using Material-UI, React Hook Form and Zod, which triggers the /graphql API to publish a message.  
+
+
+### Pending Tasks  
+- Integration work is partially completed.
+- Template subscription functionality is partially completed.

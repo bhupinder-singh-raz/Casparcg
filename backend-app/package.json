@@ -1,0 +1,51 @@
+{
+  "name": "backend-app",
+  "version": "1.0.0",
+  "description": "Backend application",
+  "main": "server.ts",
+  "scripts": {
+    "start": "nodemon server.ts",
+    "debug": "node --inspect --require ts-node/register server.ts",
+    "build": "rm -rf dist && webpack"
+  },
+  "author": "Bhupinder Singh",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.11.2",
+    "apollo-server-express": "^3.13.0",
+    "axios": "^1.2.3",
+    "casparcg-connection": "^6.3.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.10",
+    "express": "^4.18.2",
+    "form-data": "^4.0.0",
+    "graphql-subscriptions": "^3.0.0",
+    "graphql-tools": "^9.0.8",
+    "graphql-ws": "^5.16.0",
+    "helmet": "^6.0.1",
+    "mongodb": "^6.12.0",
+    "mongoose": "^5.13.2",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "winston": "^3.8.2",
+    "ws": "^8.18.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.15",
+    "@types/mongoose": "^5.11.97",
+    "@types/morgan": "^1.9.4",
+    "@types/multer": "^1.4.7",
+    "@types/node": "^18.11.18",
+    "@types/ws": "^8.5.13",
+    "nodemon": "^2.0.20",
+    "ts-loader": "^9.4.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.4",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
+  }
+}

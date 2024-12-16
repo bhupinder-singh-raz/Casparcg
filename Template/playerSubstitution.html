@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Substitution Caption</title>
+  <style>
+    .caption {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      font-family: Arial, sans-serif;
+      display: none;
+      border-radius: 10px;
+      animation: fadeIn 1s, fadeOut 1s 4s;
+    }
+
+    .player {
+      font-size: 20px;
+    }
+
+    .time {
+      font-size: 16px;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+  <script src="https://unpkg.com/apollo-client-browser@1.9.0"></script>
+</head>
+
+<body>
+  <div id="caption" class="caption">
+    <div class="player" id="playerOut"></div>
+    <div class="player" id="playerIn"></div>
+    <div class="time" id="subTime"></div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      const { ApolloClient } = window.Apollo.lib;
+      const { gql, InMemoryCache } = window.Apollo;
+
+      // Create the Apollo Client
+      const apolloClient = new ApolloClient({
+        networkInterface: Apollo.lib.createNetworkInterface({
+          uri: 'http://localhost:4000/graphql',
+          transportBatching: true,
+        }),
+        connectToDevTools: true,
+      });
+
+      // Define the GraphQL subscription query
+      const SUBSTITUTION_UPDATED = gql`
+        subscription {
+          substitutionUpdated {
+            playerOut {
+              name
+              number
+            }
+            playerIn {
+              name
+              number
+            }
+            substitutionTime
+          }
+        }
+      `;
+
+      // Function to display substitution data
+      function showSubstitution(data) {
+        const { playerOut, playerIn, substitutionTime } = data;
+
+        document.getElementById('playerOut').textContent = `Out: ${playerOut.name} (#${playerOut.number})`;
+        document.getElementById('playerIn').textContent = `In: ${playerIn.name} (#${playerIn.number})`;
+        document.getElementById('subTime').textContent = `Time: ${substitutionTime}`;
+
+        const caption = document.getElementById('caption');
+        caption.style.display = 'block';
+
+        setTimeout(() => {
+          caption.style.display = 'none';
+        }, 5000); // Duration of display
+      }
+
+      // Subscribe to substitution updates
+      apolloClient
+        .subscribe({
+          query: SUBSTITUTION_UPDATED,
+        })
+        .subscribe({
+          next({ data }) {
+            if (data && data.substitutionUpdated) {
+              showSubstitution(data.substitutionUpdated);
+            }
+          },
+          error(err) {
+            console.error('Subscription error:', err);
+          },
+        });
+    };
+  </script>
+</body>
+
+</html>
