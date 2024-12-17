@@ -15,3 +15,7 @@
 ### Pending Tasks  
 - Integration work is partially completed.
 - Template subscription functionality is partially completed.
+
+
+## Video Reference
+https://drive.google.com/file/d/17i29UEVeEIz2zjq72Y-86HgDuxdaE_23/view?usp=sharing
